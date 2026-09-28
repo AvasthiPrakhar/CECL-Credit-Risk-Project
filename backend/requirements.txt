@@ -1,1 +1,8 @@
-
+fastapi
+uvicorn
+scikit-learn
+xgboost
+joblib
+numpy
+pydantic
+langchain-google-genai
