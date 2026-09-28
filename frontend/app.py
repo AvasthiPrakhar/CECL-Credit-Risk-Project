@@ -59,19 +59,17 @@ st.markdown("""
 # 2. SIDEBAR BRANDING & SOCIAL LINKS
 # ==========================================
 with st.sidebar:
-    # Custom HTML to make your name significantly larger
-    st.markdown('<h1 style="font-size: 38px; margin-bottom: 0px;">Prakhar Avasthi</h1>', unsafe_allow_html=True)
-    st.markdown('<p style="font-size: 18px; color: gray;">Data Science & AI Professional</p>', unsafe_allow_html=True)
+    st.title("Prakhar Avasthi")
+    st.markdown("#### Data Science & AI Professional")
     
     st.divider()
     
-    # NOTE: Replace these links with your actual URLs!
     st.link_button("🔗 LinkedIn", "http://www.linkedin.com/in/prakhar-avasthi-35067a1bb", use_container_width=True)
     st.link_button("🐙 GitHub", "https://github.com/AvasthiPrakhar", use_container_width=True)
     st.link_button("📊 Kaggle", "https://www.kaggle.com/avasthiprakhar", use_container_width=True)
     
     st.divider()
-    st.markdown("📧 prakharavasthi1999@gmail.com")
+    st.markdown("📧 **prakharavasthi1999@gmail.com**")
     st.caption("Powered by FastAPI, XGBoost, and Groq/Google LLMs.")
 
 # ==========================================
