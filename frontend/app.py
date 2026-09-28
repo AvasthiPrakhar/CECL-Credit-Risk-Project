@@ -59,9 +59,12 @@ st.markdown("""
 # 2. SIDEBAR BRANDING & SOCIAL LINKS
 # ==========================================
 with st.sidebar:
+    # Cleaner native markdown with a styled, color-matched subtitle and fixed spacing
     st.markdown("## Prakhar Avasthi")
-    st.markdown("#### Data Science & AI Professional")
-    
+    st.markdown(
+        "<div style='margin-top: -15px; margin-bottom: 15px; color: #1C83E1; font-weight: 600; font-size: 16px; letter-spacing: 0.5px;'>Data Science & AI Professional</div>", 
+        unsafe_allow_html=True
+    )    
     st.divider()
     
     st.link_button("🔗 LinkedIn", "http://www.linkedin.com/in/prakhar-avasthi-35067a1bb", use_container_width=True)
