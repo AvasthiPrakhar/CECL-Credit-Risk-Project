@@ -20,16 +20,17 @@ st.divider()
 def fetch_available_models():
     """Fetches dynamic model list from backend."""
     try:
-        res = requests.get(f"{API_URL}/models", timeout=10)
+        # INCREASED TIMEOUT TO 90s to allow Render backend to cold-start!
+        res = requests.get(f"{API_URL}/models", timeout=90)
         if res.status_code == 200:
             return res.json().get("models", [])
     except Exception as e:
-        st.warning("Could not fetch live models. Falling back to default list.")
+        st.warning(f"Could not fetch live models. Backend might still be waking up. (Error: {e})")
     
-    # Fallback list if API is asleep
+    # Updated Fallback list for current APIs
     return [
-        {"id": "llama-3.3-70b-versatile", "display_name": "Groq (llama-3.3-70b-versatile) - Fallback"},
-        {"id": "gemini-1.5-flash", "display_name": "Google (gemini-1.5-flash) - Fallback"}
+        {"id": "llama-3.1-8b-instant", "display_name": "Groq (llama-3.1-8b-instant) - Fallback"},
+        {"id": "gemini-3.8-flash", "display_name": "Google (gemini-3.8-flash) - Fallback"}
     ]
 
 available_models = fetch_available_models()
@@ -76,6 +77,11 @@ with col1:
 with col2:
     st.header("2. AI Model Risk Governance (MRM)")
     
+    # NEW: A button to manually clear the cache and refetch models if it timed out!
+    if st.button("🔄 Refresh API Models", help="Click this to wake up the backend and fetch live models from Groq."):
+        st.cache_data.clear()
+        st.rerun()
+
     # User selects display name, we capture it
     selected_display_name = st.selectbox(
         "Select Target LLM Architecture (Dynamically Fetched)", 
@@ -91,13 +97,13 @@ with col2:
     if st.button("Generate MRM Audit Report", use_container_width=True, type="primary"):
         with st.spinner(f"Orchestrating {target_model_id} for Governance Reporting..."):
             try:
-                # We send the exact ID (e.g., 'llama-3.3-70b-versatile') to the backend
+                # We send the exact ID to the backend
                 res = requests.post(f"{API_URL}/generate_mrm_report", json={"model_id": target_model_id})
                 
                 if res.status_code == 200:
                     st.info(res.json()['report'])
                 else:
                     st.error(f"Provider Error: {res.json().get('detail', 'Unknown Error')}")
-                    st.warning("💡 **Tip:** The selected AI provider might be experiencing rate limits or the model might be offline. Please select a different LLM provider from the dropdown above and try again!")
+                    st.warning("💡 **Tip:** Check if your Groq API key has access to this specific model, or try selecting a different one.")
             except Exception as e:
                 st.error(f"Backend Connection Error: {e}")
