@@ -6,3 +6,4 @@ joblib
 numpy
 pydantic
 langchain-google-genai
+langchain-groq
