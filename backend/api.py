@@ -88,8 +88,7 @@ def get_live_models():
             logger.error(f"Failed to fetch Groq models: {e}")
             
     # 2. Append Google fallback
-    models_list.append({"id": "gemini-1.5-flash", "display_name": "Google (gemini-1.5-flash)"})
-    
+    models_list.append({"id": "gemini-3.8-flash", "display_name": "Google (gemini-3.8-flash)"})    
     return {"models": models_list}
 
 @app.post("/predict_cecl")
