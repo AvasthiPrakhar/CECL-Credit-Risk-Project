@@ -116,24 +116,28 @@ def generate_report(req: ReportRequest):
     """
 
     try:
-        # Orchestrate LLM based on client-side provider selection
-        if req.provider == "Groq (LLaMA 3)":
+        
+    # Orchestrate LLM based on client-side provider selection
+        if req.provider == "Groq (LLaMA 3.1 8B)":
             groq_key = os.getenv("GROQ_API_KEY")
             if not groq_key:
                 raise HTTPException(status_code=500, detail="Groq API credential not configured.")
-            llm = ChatGroq(model_name="llama3-8b-8192", groq_api_key=groq_key, temperature=0.2)
+            # Upgraded to the latest LLaMA 3.1 model
+            llm = ChatGroq(model_name="llama-3.1-8b-instant", groq_api_key=groq_key, temperature=0.2)
             
-        elif req.provider == "Groq (Mixtral)":
+        elif req.provider == "Groq (LLaMA 3.3 70B)":
             groq_key = os.getenv("GROQ_API_KEY")
             if not groq_key:
                 raise HTTPException(status_code=500, detail="Groq API credential not configured.")
-            llm = ChatGroq(model_name="mixtral-8x7b-32768", groq_api_key=groq_key, temperature=0.2)
+            # Upgraded to the massive LLaMA 3.3 70B model
+            llm = ChatGroq(model_name="llama-3.3-70b-versatile", groq_api_key=groq_key, temperature=0.2)
             
         elif req.provider == "Google (Gemini)":
             google_key = os.getenv("GOOGLE_API_KEY")
             if not google_key:
                 raise HTTPException(status_code=500, detail="Google API credential not configured.")
-            llm = ChatGoogleGenerativeAI(model="gemini-1.5-flash", google_api_key=google_key, temperature=0.2)
+            # Using Google's current reliable flash endpoint
+            llm = ChatGoogleGenerativeAI(model="gemini-3.5-flash", google_api_key=google_key, temperature=0.2)
             
         else:
             raise HTTPException(status_code=400, detail="Unsupported LLM Provider selected.")
