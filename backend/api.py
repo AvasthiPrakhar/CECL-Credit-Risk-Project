@@ -60,6 +60,15 @@ class ReportRequest(BaseModel):
 def health_check():
     return {"status": "healthy", "service": "CECL Risk API"}
 
+@app.get("/metrics")
+def get_model_metrics():
+    """Endpoint to serve model training methodology and performance metrics."""
+    try:
+        with open("metrics.json", "r") as f:
+            return json.load(f)
+    except FileNotFoundError:
+        return {"error": "Metrics file not found."}
+
 @app.get("/models")
 def get_live_models():
     """
