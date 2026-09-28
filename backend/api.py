@@ -77,7 +77,7 @@ def generate_report():
         with open("metrics.json", "r") as f:
             metrics = json.load(f)
         
-        llm = ChatGoogleGenerativeAI(model="gemini-1.5-flash-latest", google_api_key=google_api_key, temperature=0.2)
+        llm = ChatGoogleGenerativeAI(model="gemini-3.5-flash", google_api_key=google_api_key, temperature=0.2)
         
         prompt = f"""
         You are a Senior Model Risk Auditor. Generate a 3-paragraph MRM report for a CECL model.
