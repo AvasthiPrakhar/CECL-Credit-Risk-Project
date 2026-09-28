@@ -59,7 +59,7 @@ st.markdown("""
 # 2. SIDEBAR BRANDING & SOCIAL LINKS
 # ==========================================
 with st.sidebar:
-    st.title("Prakhar Avasthi")
+    st.markdown("## Prakhar Avasthi")
     st.markdown("#### Data Science & AI Professional")
     
     st.divider()
