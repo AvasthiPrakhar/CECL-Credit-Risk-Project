@@ -66,6 +66,10 @@ def predict_cecl(loan: LoanData):
         "Expected_Credit_Loss": round(final_cecl, 2)
     }
 
+@app.get("/")
+def health_check():
+    return {"status": "CECL Risk API is successfully running and active!"}
+
 @app.post("/generate_mrm_report")
 def generate_report():
     # Securely fetch the API key from environment variables
