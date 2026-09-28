@@ -65,8 +65,8 @@ with col2:
     # Dynamic selection of foundational LLM architecture
     selected_model = st.selectbox(
         "Select Target LLM Architecture", 
-        ["Groq (LLaMA 3)", "Groq (Mixtral)", "Google (Gemini)"],
-        help="Routes query to specific language model backend for generation."
+        ["Groq (LLaMA 3.1 8B)", "Groq (LLaMA 3.3 70B)", "Google (Gemini)"],
+        help="Routes query to specific language model backend for generation. Groq LLaMA models are highly recommended for lowest latency."
     )
     
     st.markdown(f"Initialize pipeline. The backend will invoke **{selected_model}** to autogenerate an ASC 326 compliance report utilizing localized portfolio metrics and algorithm metadata.")
